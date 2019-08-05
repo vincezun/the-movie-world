@@ -1,0 +1,26 @@
+.search-box {
+  width: 100%;
+  // font: 1.2rem/17px $f-regular;
+  color: #979797;
+  background-color: #202020;
+  padding: 8px 12px;
+  border: none;
+  caret-color: #979797;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+.search-overlay {
+  background-color: #202020;
+  // font: 1.2rem/17px $f-regular;
+  color: #f8f8f8;
+  position: absolute;
+  left: 30px;
+  right: 30px;
+
+  li {
+    list-style: none;
+  }
+}
