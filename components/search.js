@@ -1,12 +1,9 @@
-import { useState, useContext, Component } from 'react';
-import MovieProvider from './movieContext';
 import fetch from 'isomorphic-unfetch';
-import axios from 'axios';
 import Link from 'next/link';
 
 import '../static/styles/search.scss';
 
-class Search extends Component {
+class Search extends React.Component {
   constructor(props) {
     super(props);
 
@@ -48,19 +45,27 @@ class Search extends Component {
         <ul className='search-overlay'>
           {this.state.movies.slice(0, 8).map((movie, i) => (
             <li key={i}>
-              <Link href='/movie/[id]' as={`/movie/${movie.id}`}>
+              <Link
+                href={{
+                  pathname: '/movie/[id]',
+                  query: {
+                    title: movie.title,
+                    poster: movie.poster_path,
+                    overview: movie.overview,
+                    releaseDate: movie.release_date,
+                    rating: movie.vote_average
+                  }
+                }}
+                as={`/movie/${movie.id}`}
+              >
                 <a
-                  onClick={() => (
-                    <MovieProvider
-                      value={{
-                        title: movie.title,
-                        poster: movie.poster_path,
-                        overview: movie.overview,
-                        releaseDate: movie.release_date,
-                        rating: movie.vote_average
-                      }}
-                    />
-                  )}
+                  onClick={() => {
+                    localStorage.setItem('title', movie.title);
+                    localStorage.setItem('poster', movie.poster_path);
+                    localStorage.setItem('overview', movie.overview);
+                    localStorage.setItem('releaseDate', movie.release_date);
+                    localStorage.setItem('rating', movie.vote_average);
+                  }}
                 >
                   {movie.title}
                 </a>
@@ -74,10 +79,7 @@ class Search extends Component {
 }
 
 // const Search = () => {
-//   const [movieData, setMovieData] = useContext(MovieContext);
-
 //   const [movies, setMovie] = useState([]);
-
 //   const performSearch = async searchValue => {
 //     const url = `https://api.themoviedb.org/3/search/movie?api_key=${
 //       process.env.API_KEY
@@ -110,20 +112,20 @@ class Search extends Component {
 //       <ul className='search-overlay'>
 //         {movies.slice(0, 8).map((movie, i) => (
 //           <li key={i}>
-//             <Link href='/movie/[id]' as={`/movie/${movie.id}`}>
-//               <a
-//                 onClick={() =>
-//                   setMovieData({
-//                     title: movie.title,
-//                     poster: movie.poster_path,
-//                     overview: movie.overview,
-//                     releaseDate: movie.release_date,
-//                     rating: movie.vote_average
-//                   })
+//             <Link
+//               href={{
+//                 pathname: '/movie/[id]',
+//                 query: {
+//                   title: movie.title,
+//                   poster: movie.poster_path,
+//                   overview: movie.overview,
+//                   releaseDate: movie.release_date,
+//                   rating: movie.vote_average
 //                 }
-//               >
-//                 {movie.title}
-//               </a>
+//               }}
+//               as={`/movie/${movie.id}`}
+//             >
+//               <a>{movie.title}</a>
 //             </Link>
 //           </li>
 //         ))}
