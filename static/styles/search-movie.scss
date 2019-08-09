@@ -1,0 +1,13 @@
+@import '_mixins.scss';
+
+.movie-w {
+  @include base-w;
+
+  .movie + .movie {
+    margin-top: 15px;
+  }
+
+  .movie:nth-child(2) {
+    margin-top: 20px;
+  }
+}

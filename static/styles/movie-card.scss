@@ -1,0 +1,54 @@
+@import '_mixins.scss';
+
+.movie {
+  // margin-top: 45px;
+  display: grid;
+  grid-template-columns: 79px 25px 1fr;
+  grid-template-areas:
+    'poster title title'
+    'poster date date'
+    'poster star rating';
+  grid-template-rows: auto auto 1fr;
+
+  .poster {
+    width: 79px;
+    grid-area: poster;
+  }
+
+  .title {
+    font: 700 1.4rem/19px $font;
+    color: #202020;
+    grid-area: title;
+    margin-left: 12px;
+  }
+
+  .release-date {
+    font: 400 1.2rem/17px $font;
+    color: #979797;
+    grid-area: date;
+    margin-left: 12px;
+  }
+
+  .rating {
+    font: 400 1.2rem/17px $font;
+    color: #979797;
+    grid-area: rating;
+    margin: 9px 0 0 5px;
+  }
+
+  .star-icon {
+    width: 14px;
+    grid-area: star;
+    margin: 8px 0 0 12px;
+  }
+}
+
+// %movie-margin {
+//   .movie + .movie {
+//     margin-top: 15px;
+//   }
+
+//   .movie:nth-child(2) {
+//     margin-top: 20px;
+//   }
+// }
