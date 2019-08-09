@@ -1,1 +1,7 @@
 $font: 'Roboto', sans-serif;
+
+@mixin base-w {
+  padding: 120px 30px 30px;
+  background-color: #ffffff;
+  min-height: 100vh;
+}
