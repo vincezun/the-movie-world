@@ -1,60 +1,57 @@
 import fetch from 'isomorphic-unfetch';
 
 import Layout from '../components/layout/layout';
-import Search from '../components/search';
-
-import star from '../static/images/star.svg';
+import MovieCard from '../components/movie/movie-card';
 
 import '../static/styles/index.scss';
 
 const Index = ({ topRatedMovies, popularMovies, upcomingMovies }) => (
   <Layout>
     <div className='home-w'>
-      <Search />
       <div className='top-rated-w'>
         <h2 className='heading'>Top Rated Movies</h2>
-        {topRatedMovies.slice(0, 4).map((topRatedMovie, i) => (
-          <figure key={i} className='movie'>
-            <img
-              src={`http://image.tmdb.org/t/p/w342${topRatedMovie.poster_path}`}
-              alt={topRatedMovie.title}
-              className='poster'
+        {topRatedMovies.slice(0, 4).map(topRatedMovie => {
+          let date = new Date(topRatedMovie.release_date);
+          return (
+            <MovieCard
+              key={topRatedMovie.id}
+              poster={topRatedMovie.poster_path}
+              title={topRatedMovie.title}
+              releaseDate={date.getFullYear()}
+              rating={topRatedMovie.vote_average}
             />
-            <figcaption className='title'>{topRatedMovie.title}</figcaption>
-            <img src={star} alt='Star' className='star-icon' />
-            <p className='rating'>{topRatedMovie.vote_average}</p>
-          </figure>
-        ))}
+          );
+        })}
       </div>
       <div className='popular-w'>
         <h2 className='heading'>Popular Movies</h2>
-        {popularMovies.slice(0, 4).map((popularMovie, i) => (
-          <figure key={i} className='movie'>
-            <img
-              src={`http://image.tmdb.org/t/p/w342${popularMovie.poster_path}`}
-              alt={popularMovie.title}
-              className='poster'
+        {popularMovies.slice(0, 4).map(popularMovie => {
+          let date = new Date(popularMovie.release_date);
+          return (
+            <MovieCard
+              key={popularMovie.id}
+              poster={popularMovie.poster_path}
+              title={popularMovie.title}
+              releaseDate={date.getFullYear()}
+              rating={popularMovie.vote_average}
             />
-            <figcaption className='title'>{popularMovie.title}</figcaption>
-            <img src={star} alt='Star' className='star-icon' />
-            <p className='rating'>{popularMovie.vote_average}</p>
-          </figure>
-        ))}
+          );
+        })}
       </div>
       <div className='upcoming-w'>
         <h2 className='heading'>Upcoming Movies</h2>
-        {upcomingMovies.slice(0, 4).map((upcomingMovie, i) => (
-          <figure key={i} className='movie'>
-            <img
-              src={`http://image.tmdb.org/t/p/w342${upcomingMovie.poster_path}`}
-              alt={upcomingMovie.title}
-              className='poster'
+        {upcomingMovies.slice(0, 4).map(upcomingMovie => {
+          let date = new Date(upcomingMovie.release_date);
+          return (
+            <MovieCard
+              key={upcomingMovie.id}
+              poster={upcomingMovie.poster_path}
+              title={upcomingMovie.title}
+              releaseDate={date.getFullYear()}
+              rating={upcomingMovie.vote_average}
             />
-            <figcaption className='title'>{upcomingMovie.title}</figcaption>
-            <img src={star} alt='Star' className='star-icon' />
-            <p className='rating'>{upcomingMovie.vote_average}</p>
-          </figure>
-        ))}
+          );
+        })}
       </div>
     </div>
   </Layout>

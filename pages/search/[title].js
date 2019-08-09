@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
 
 import Layout from '../../components/layout/layout';
-import Search from '../../components/search';
 import MovieCard from '../../components/movie/movie-card';
 
 import '../../static/styles/search-movie.scss';
