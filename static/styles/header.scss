@@ -1,25 +1,20 @@
+@import '_mixins.scss';
+
 .header {
-  background-color: #101010;
-  padding: 0 30px;
+  background-color: #000000;
+  padding: 20px 30px 15px;
   position: fixed;
   width: 100%;
   z-index: 9;
 
   .nav {
-    height: 55px;
+    height: 70px;
     display: grid;
     align-items: center;
 
-    .logo-w {
-      display: grid;
-      grid-template-columns: 25px auto;
-      grid-column-gap: 10px;
-      align-items: center;
-
-      .heading {
-        // font: 1.4rem/19px $f-bold;
-        color: #f8f8f8;
-      }
+    .heading {
+      font: 700 1.6rem/21px $font;
+      color: #00ffba;
     }
 
     .hamburger {
@@ -33,7 +28,7 @@
       .bar {
         position: absolute;
         height: 2px;
-        width: 28px;
+        width: 26px;
         background-color: #f8f8f8;
         top: 0;
         left: 0;
@@ -47,18 +42,18 @@
           content: '';
           position: absolute;
           height: 2px;
-          width: 28px;
+          width: 26px;
           background-color: #f8f8f8;
           left: 0;
           transition: 650ms;
         }
 
         &::before {
-          bottom: 8px;
+          bottom: 7px;
         }
 
         &::after {
-          top: 8px;
+          top: 7px;
         }
       }
     }
@@ -70,7 +65,7 @@
 
       li {
         a {
-          // font: 1.4rem/19px $f-regular;
+          font: 400 1.4rem/19px $font;
           color: #f8f8f8;
         }
       }
