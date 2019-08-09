@@ -1,47 +1,11 @@
-.home-w {
-  padding: 90px 30px 30px;
-  background-color: #101010;
-  min-height: 100vh;
+@import '_mixins.scss';
 
-  //reusable styles
-  .poster {
-    width: 79px;
-    grid-area: poster;
-    border-radius: 10px;
-  }
+.home-w {
+  @include base-w;
 
   .heading {
-    // font: 1.8rem/23px $f-regular;
-    color: #f8f8f8;
-  }
-
-  .title {
-    // font: 1.4rem/19px $f-regular;
-    color: #f8f8f8;
-    grid-area: title;
-    margin-left: 12px;
-  }
-
-  .rating {
-    // font: 1.4rem/19px $f-regular;
-    color: #979797;
-    grid-area: rating;
-    margin: 8px 0 0 5px;
-  }
-
-  .star-icon {
-    width: 16px;
-    grid-area: star;
-    margin: 8px 0 0 12px;
-  }
-
-  .movie {
-    display: grid;
-    grid-template-columns: 79px 25px 1fr;
-    grid-template-areas:
-      'poster title title'
-      'poster star rating';
-    grid-template-rows: auto 1fr;
+    font: 700 1.8rem/23px $font;
+    color: #202020;
   }
 
   %movie-margin {
@@ -56,7 +20,6 @@
 
   .top-rated-w {
     @extend %movie-margin;
-    margin-top: 45px;
   }
 
   .popular-w {
