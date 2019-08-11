@@ -19,20 +19,24 @@ const Movie = ({ movieResults }) => {
 
   return (
     <Layout>
-      <div className='movie-w'>
-        {movies.map(movie => {
-          let date = new Date(movie.release_date);
-          return (
-            <MovieCard
-              key={movie.id}
-              poster={movie.poster_path}
-              title={movie.title}
-              releaseDate={date.getFullYear()}
-              rating={movie.vote_average}
-            />
-          );
-        })}
-      </div>
+      {movies !== undefined && movies.length > 0 ? (
+        <div className='movie-w'>
+          {movies.map(movie => {
+            let date = new Date(movie.release_date);
+            return (
+              <MovieCard
+                key={movie.id}
+                poster={movie.poster_path}
+                title={movie.title}
+                releaseDate={date.getFullYear()}
+                rating={movie.vote_average}
+              />
+            );
+          })}
+        </div>
+      ) : (
+        <p className='no-results'>No Results</p>
+      )}
     </Layout>
   );
 };
