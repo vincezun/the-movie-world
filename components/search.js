@@ -1,11 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
 import { useComponentVisible } from '../components/hook/useComponentVisible';
+import Router from 'next/router';
 
 import '../static/styles/search.scss';
-
-import searchIcon from '../static/images/search-icon.svg';
 
 const Search = () => {
   const [movies, setMovies] = useState([]);
@@ -32,20 +31,39 @@ const Search = () => {
 
   const handleChange = e => {
     let value = e.target.value;
+    value.trim() === '' ? (value = '') : value;
     performSearch(value);
     setIsComponentVisible(true);
     const noResults = document.querySelector('.no-results');
-    noResults
-      ? value
-        ? noResults.classList.add('active')
-        : noResults.classList.remove('active')
-      : null;
+    if (noResults) {
+      if (value) {
+        noResults.classList.add('active');
+      } else {
+        noResults.classList.remove('active');
+      }
+    }
   };
 
   const hideOverlay = () => {
     const searchBox = document.querySelector('.search-box');
     searchBox.value = '';
     setIsComponentVisible(false);
+  };
+
+  const handleKeyDown = e => {
+    if (e.key === 'Enter') {
+      const searchBox = document.querySelector('.search-box');
+
+      if (searchBox.value.trim() !== '') {
+        Router.push(
+          '/search/[title]',
+          `/search/${encodeURIComponent(searchBox.value)}`
+        );
+      }
+
+      searchBox.value = '';
+      setIsComponentVisible(false);
+    }
   };
 
   return (
@@ -60,10 +78,8 @@ const Search = () => {
           placeholder='Search any movies'
           autoComplete='off'
           maxLength='75'
+          onKeyDown={handleKeyDown}
         />
-        <button className='search-btn'>
-          <img src={searchIcon} alt='Search' />
-        </button>
       </div>
       {isComponentVisible && (
         <ul className='search-overlay'>
