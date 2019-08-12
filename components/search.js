@@ -56,8 +56,8 @@ const Search = () => {
 
       if (searchBox.value.trim() !== '') {
         Router.push(
-          '/search/[title]',
-          `/search/${encodeURIComponent(searchBox.value)}`
+          '/search/[title]/page/[number]',
+          `/search/${encodeURIComponent(searchBox.value)}/page/${1}`
         );
       }
 
@@ -89,9 +89,9 @@ const Search = () => {
                 <li key={i} onClick={hideOverlay}>
                   <Link
                     href={{
-                      pathname: '/search/[title]'
+                      pathname: '/search/[title]/page/[number]'
                     }}
-                    as={`/search/${encodeURIComponent(movie.title)}`} //if % is in the url before it fetch, it will throw URIError: URI malformed
+                    as={`/search/${encodeURIComponent(movie.title)}/page/${1}`} //if % is in the url before it fetch, it will throw URIError: URI malformed
                   >
                     <a className='links'>{movie.title}</a>
                   </Link>
