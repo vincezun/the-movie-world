@@ -7,16 +7,25 @@ import Pagination from '../../../../components/pagination';
 
 import '../../../../static/styles/search-movie.scss';
 
-const Movie = ({ movieResults, searchValue, totalResults }) => {
+const Movie = ({
+  movieResults,
+  searchValue,
+  totalResults,
+  activePageNumber
+}) => {
   const [movies, setMovies] = useState(movieResults);
   const [totalMovieResults, setTotalMovieResults] = useState(0);
-  const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(activePageNumber);
 
   useEffect(() => {
     setMovies(movieResults);
     setTotalMovieResults(totalResults);
-    setCurrentPage(1);
-  }, [searchValue || currentPage]);
+    setCurrentPage(activePageNumber);
+  });
+
+  useEffect(() => {
+    scroll(0, 0);
+  }, [activePageNumber]);
 
   const NextPage = async pageNumber => {
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${
@@ -25,10 +34,11 @@ const Movie = ({ movieResults, searchValue, totalResults }) => {
 
     const res = await fetch(url);
     const data = await res.json();
+
     return setMovies(data.results), setCurrentPage(pageNumber);
   };
 
-  const numberPages = Math.floor(totalMovieResults / 20);
+  const numberPages = Math.min(Math.floor(totalMovieResults / 20), 993);
 
   return (
     <Layout>
@@ -52,7 +62,7 @@ const Movie = ({ movieResults, searchValue, totalResults }) => {
       )}
       {totalMovieResults > 20 ? (
         <Pagination
-          totalPages={Math.min(numberPages, 993)}
+          totalPages={numberPages}
           nextPage={NextPage}
           currentPage={currentPage}
           title={searchValue}
@@ -63,11 +73,11 @@ const Movie = ({ movieResults, searchValue, totalResults }) => {
 };
 
 Movie.getInitialProps = async context => {
-  const { title } = context.query;
+  const { title, number } = context.query;
 
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${
     process.env.API_KEY
-  }&query=${title}`;
+  }&query=${title}&page=${number}`;
 
   const res = await fetch(url);
   const data = await res.json();
@@ -75,7 +85,8 @@ Movie.getInitialProps = async context => {
   return {
     movieResults: data.results,
     totalResults: data.total_results,
-    searchValue: title
+    searchValue: title,
+    activePageNumber: parseInt(number)
   };
 };
 
