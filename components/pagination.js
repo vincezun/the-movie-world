@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
 import '../static/styles/pagination.scss';
 import Router from 'next/router';
 
@@ -70,8 +69,7 @@ const Pagination = ({ totalPages, nextPage, currentPage, title }) => {
 
   const pages = fetchPageNumbers();
 
-  const handleClick = page => evt => {
-    evt.preventDefault();
+  const handleClick = page => () => {
     nextPage(page);
 
     Router.push(
@@ -81,8 +79,7 @@ const Pagination = ({ totalPages, nextPage, currentPage, title }) => {
   };
 
   const moveLeft = currentPage - pageNeighbours * 2 - 1;
-  const handleMoveLeft = evt => {
-    evt.preventDefault();
+  const handleMoveLeft = () => {
     nextPage(moveLeft);
 
     Router.push(
@@ -92,8 +89,7 @@ const Pagination = ({ totalPages, nextPage, currentPage, title }) => {
   };
 
   const moveRight = currentPage + pageNeighbours * 2 + 1;
-  const handleMoveRight = evt => {
-    evt.preventDefault();
+  const handleMoveRight = () => {
     nextPage(moveRight);
 
     Router.push(
@@ -170,26 +166,3 @@ const Pagination = ({ totalPages, nextPage, currentPage, title }) => {
 };
 
 export default Pagination;
-// const pageLinks = [];
-// for (let i = 1; i <= totalPages + 1; i++) {
-//   let active = currentPage == i ? 'active' : null;
-
-//   pageLinks.push(
-//     <li
-//       className={`pagination ${active}`}
-//       key={i}
-//       onClick={() => nextPage(i)}
-//     >
-//       <Link
-//         href={{
-//           pathname: '/search/[title]'
-//         }}
-//         as={`/search/${encodeURIComponent(title)}`}
-//       >
-//         <a>{i}</a>
-//       </Link>
-//     </li>
-//   );
-// }
-
-// return <ul className='pagination'>{pageLinks}</ul>;
