@@ -3,20 +3,47 @@
 .pagination {
   padding: 0 30px 30px;
 
+  @include breakpoint(sw500px) {
+    width: 503px;
+    margin: auto;
+  }
+
+  @include breakpoint(sw768px) {
+    padding: 0 30px 70px;
+    width: 768px;
+    margin: unset;
+  }
+
+  @include breakpoint(sw1024px) {
+    width: 1024px;
+    margin: auto;
+  }
+
   .page-item {
     font: 700 1.2rem/17px $font;
     display: inline-block;
-    padding: 4px 8px;
+    padding: 4px 0px;
     background-color: #ffffff;
+
+    @include breakpoint(sw768px) {
+      font: 700 1.4rem/19px $font;
+    }
+
+    @include breakpoint(sw1024px) {
+      &:hover {
+        background-color: #dddddd;
+      }
+    }
 
     .page-link {
       color: #202020;
+      padding: 5px 10px;
     }
 
     &.active {
       background-color: #202020;
 
-      a {
+      .page-link {
         color: #ffffff;
       }
     }

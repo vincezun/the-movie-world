@@ -1,54 +1,63 @@
 @import '_mixins.scss';
 
 .movie {
-  // margin-top: 45px;
-  display: grid;
-  grid-template-columns: 79px 25px 1fr;
-  grid-template-areas:
-    'poster title title'
-    'poster date date'
-    'poster star rating';
-  grid-template-rows: auto auto 1fr;
+  min-width: 0;
+  margin-top: 30px;
+
+  @include breakpoint(sw768px) {
+    margin-top: 40px;
+
+    &:nth-child(4) {
+      margin-top: 15px;
+    }
+
+    &:nth-child(5) {
+      margin-top: 15px;
+    }
+  }
+
+  &:nth-child(2) {
+    margin-top: 15px;
+  }
+
+  &:nth-child(3) {
+    margin-top: 15px;
+  }
 
   .poster {
-    width: 79px;
-    grid-area: poster;
+    width: 100%;
+    border: 3px solid #ececec;
   }
 
   .title {
     font: 700 1.4rem/19px $font;
     color: #202020;
-    grid-area: title;
-    margin-left: 12px;
+    text-align: left;
+    margin-top: 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
+    @include breakpoint(sw768px) {
+      font: 700 1.5rem/20px $font;
+    }
   }
 
   .release-date {
     font: 400 1.2rem/17px $font;
     color: #979797;
-    grid-area: date;
-    margin-left: 12px;
   }
 
-  .rating {
-    font: 400 1.2rem/17px $font;
-    color: #979797;
-    grid-area: rating;
-    margin: 9px 0 0 5px;
-  }
+  // .rating {
+  //   font: 400 1.2rem/17px $font;
+  //   color: #979797;
+  //   grid-area: rating;
+  //   margin: 9px 0 0 5px;
+  // }
 
-  .star-icon {
-    width: 14px;
-    grid-area: star;
-    margin: 8px 0 0 12px;
-  }
+  // .star-icon {
+  //   width: 14px;
+  //   grid-area: star;
+  //   margin: 8px 0 0 12px;
+  // }
 }
-
-// %movie-margin {
-//   .movie + .movie {
-//     margin-top: 15px;
-//   }
-
-//   .movie:nth-child(2) {
-//     margin-top: 20px;
-//   }
-// }

@@ -2,13 +2,20 @@
 
 .movie-w {
   @include base-w;
+  @include base-display;
 
-  .movie + .movie {
-    margin-top: 15px;
-  }
+  .result-heading {
+    font: 400 1.4rem/19px $font;
+    color: #202020;
+    grid-area: heading;
 
-  .movie:nth-child(2) {
-    margin-top: 20px;
+    @include breakpoint(sw768px) {
+      font: 400 1.8rem/23px $font;
+    }
+
+    .search-value {
+      font-weight: 700;
+    }
   }
 }
 

@@ -3,32 +3,45 @@
 .home-w {
   @include base-w;
 
-  .heading {
-    font: 700 1.8rem/23px $font;
-    color: #202020;
-  }
+  .heading-w {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-area: heading;
+    align-items: flex-end;
 
-  %movie-margin {
-    .movie + .movie {
-      margin-top: 15px;
+    .heading {
+      @include heading;
     }
 
-    .movie:nth-child(2) {
-      margin-top: 20px;
+    .see-more {
+      font: 400 1.2rem/17px $font;
+      color: #979797;
+
+      @include breakpoint(sw768px) {
+        font: 400 1.5rem/20px $font;
+      }
     }
   }
 
-  .top-rated-w {
-    @extend %movie-margin;
+  .top-rated-overview-w {
+    @include base-display;
   }
 
-  .popular-w {
-    @extend %movie-margin;
-    margin-top: 30px;
+  %margin {
+    margin-top: 50px;
+
+    @include breakpoint(sw768px) {
+      margin-top: 70px;
+    }
   }
 
-  .upcoming-w {
-    @extend %movie-margin;
-    margin-top: 30px;
+  .popular-overview-w {
+    @include base-display;
+    @extend %margin;
+  }
+
+  .upcoming-overview-w {
+    @include base-display;
+    @extend %margin;
   }
 }

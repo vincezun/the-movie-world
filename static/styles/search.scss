@@ -3,6 +3,20 @@
 .search-w {
   margin-top: 15px;
 
+  @include breakpoint(sw660px) {
+    position: absolute;
+    top: 0;
+    left: 170px;
+    width: 270px;
+  }
+
+  @include breakpoint(sw1024px) {
+    top: 15px;
+    left: 0;
+    right: 414px;
+    margin: auto;
+  }
+
   .search-box {
     width: 100%;
     font: 400 1.2rem/17px $font;
@@ -24,13 +38,16 @@
 
 .search-overlay {
   background-color: #ffffff;
-  position: absolute;
-  top: 89px;
-  left: 30px;
-  right: 30px;
-  border-right: 1px solid #dfdfdf;
-  border-bottom: 1px solid #dfdfdf;
-  border-left: 1px solid #dfdfdf;
+  margin-top: -1px;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+
+  @include breakpoint(sw660px) {
+    margin-top: 6px;
+    margin-left: 140px;
+    width: 270px;
+  }
 
   li {
     list-style: none;
@@ -42,7 +59,7 @@
     a {
       font: 400 1.2rem/17px $font;
       color: #202020;
-      padding: 6px 0 6px 12px;
+      padding: 8px 0 8px 12px;
       display: block;
     }
   }
