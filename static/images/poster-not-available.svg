@@ -1,9 +1,9 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="232.11" height="303.718" viewBox="0 0 232.11 303.718">
+<svg xmlns="http://www.w3.org/2000/svg" width="370" height="556" viewBox="0 0 370 556">
   <g id="image-not-available" transform="translate(-2986 -579)">
-    <rect id="Rectangle_31" data-name="Rectangle 31" width="232.11" height="303.718" transform="translate(2986 579)" fill="#dfdfdf"/>
-    <g id="frame-landscape" transform="translate(3056 660.669)">
-      <path id="Path_313" data-name="Path 313" d="M91.384,33.331H1.471A1.471,1.471,0,0,0,0,34.8v70.3a1.471,1.471,0,0,0,1.471,1.471H91.384a1.471,1.471,0,0,0,1.471-1.471V34.8A1.471,1.471,0,0,0,91.384,33.331ZM84.028,94.842,63.794,73.889a.6.6,0,0,0-.831-.034L48.93,86.207,30.993,64.121a.59.59,0,0,0-.48-.222.6.6,0,0,0-.47.242L8.827,92.609V42.158h75.2V94.842Z" fill="#aeaeae"/>
-      <path id="Path_314" data-name="Path 314" d="M192.748,100.927a7.218,7.218,0,1,0-7.217-7.218A7.219,7.219,0,0,0,192.748,100.927Z" transform="translate(-130.941 -37.518)" fill="#aeaeae"/>
+    <rect id="Rectangle_31" data-name="Rectangle 31" width="370" height="556" transform="translate(2986 579)" fill="#dfdfdf"/>
+    <g id="frame-landscape" transform="translate(3091 794)">
+      <path id="Path_313" data-name="Path 313" d="M157.96,33.331H2.543A2.543,2.543,0,0,0,0,35.874V157.387a2.543,2.543,0,0,0,2.543,2.543H157.96a2.542,2.542,0,0,0,2.543-2.543V35.874A2.542,2.542,0,0,0,157.96,33.331ZM145.245,139.655l-34.974-36.219a1.041,1.041,0,0,0-1.436-.058l-24.257,21.35-31-38.176a1.021,1.021,0,0,0-.829-.385,1.039,1.039,0,0,0-.812.418L15.258,135.8V48.589H145.245v91.067Z" transform="translate(0 -33.331)" fill="#aeaeae"/>
+      <path id="Path_314" data-name="Path 314" d="M198.006,111.445a12.477,12.477,0,1,0-12.475-12.476A12.478,12.478,0,0,0,198.006,111.445Z" transform="translate(-91.171 -59.454)" fill="#aeaeae"/>
     </g>
   </g>
 </svg>
