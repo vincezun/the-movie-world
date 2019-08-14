@@ -1,13 +1,12 @@
-import star from '../../static/images/star.svg';
 import posterNotAvailabble from '../../static/images/poster-not-available.svg';
 
 import '../../static/styles/movie-card.scss';
 
-const MovieCard = ({ poster, title, releaseDate, rating }) => (
+const MovieCard = ({ poster, title, releaseDate }) => (
   <figure className='movie'>
     {poster ? (
       <img
-        src={`http://image.tmdb.org/t/p/w342${poster}`}
+        src={`http://image.tmdb.org/t/p/w370_and_h556_bestv2${poster}`}
         alt={title}
         className='poster'
       />
@@ -27,12 +26,6 @@ const MovieCard = ({ poster, title, releaseDate, rating }) => (
       <p className='release-date'>{releaseDate}</p>
     ) : (
       <p className='release-date'>N/A</p>
-    )}
-    <img src={star} alt='Star' className='star-icon' />
-    {rating ? (
-      <p className='rating'>{rating}</p>
-    ) : (
-      <p className='rating'>N/A</p>
     )}
   </figure>
 );
