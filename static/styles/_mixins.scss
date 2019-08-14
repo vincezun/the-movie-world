@@ -1,7 +1,70 @@
 $font: 'Roboto', sans-serif;
 
+@mixin breakpoint($breakpoint) {
+  @if $breakpoint == sw500px {
+    @media only screen and(min-width: 500px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == sw660px {
+    @media only screen and(min-width: 660px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == sw768px {
+    @media only screen and(min-width: 768px) {
+      @content;
+    }
+  }
+
+  @if $breakpoint == sw1024px {
+    @media only screen and(min-width: 1024px) {
+      @content;
+    }
+  }
+}
+
 @mixin base-w {
-  padding: 120px 30px 30px;
+  padding: 135px 30px 30px;
   background-color: #ffffff;
-  min-height: 100vh;
+
+  @include breakpoint(sw660px) {
+    padding: 100px 30px 30px;
+  }
+
+  @include breakpoint(sw768px) {
+    padding: 135px 30px 40px;
+  }
+}
+
+@mixin base-display {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 'heading heading';
+  grid-column-gap: 20px;
+
+  @include breakpoint(sw500px) {
+    grid-template-columns: 210px 210px;
+    justify-content: center;
+  }
+
+  @include breakpoint(sw768px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-areas: 'heading heading heading heading';
+  }
+
+  @include breakpoint(sw1024px) {
+    grid-template-columns: 226px 226px 226px 226px;
+  }
+}
+
+@mixin heading {
+  font: 700 1.6rem/21px $font;
+  color: #202020;
+
+  @include breakpoint(sw768px) {
+    font: 700 2.2rem/27px $font;
+  }
 }
