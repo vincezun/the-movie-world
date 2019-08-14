@@ -1,0 +1,19 @@
+@import '_mixins.scss';
+
+.top-rated-w {
+  @include base-w;
+  @include base-display;
+
+  .heading {
+    @include heading;
+    grid-area: heading;
+  }
+
+  .pagination {
+    grid-area: pagination;
+  }
+
+  .movie-card {
+    grid-area: movie-card;
+  }
+}
