@@ -1,4 +1,5 @@
 import fetch from 'isomorphic-unfetch';
+import Link from 'next/link';
 
 import Layout from '../components/layout/layout';
 import MovieCard from '../components/movie/movie-card';
@@ -8,8 +9,16 @@ import '../static/styles/index.scss';
 const Index = ({ topRatedMovies, popularMovies, upcomingMovies }) => (
   <Layout>
     <div className='home-w'>
-      <div className='top-rated-w'>
-        <h2 className='heading'>Top Rated Movies</h2>
+      <div className='top-rated-overview-w'>
+        <div className='heading-w'>
+          <h2 className='heading'>Top Rated Movies</h2>
+          <Link
+            href={{ pathname: '/top-rated/page/[number]' }}
+            as='/top-rated/page/1'
+          >
+            <a className='see-more'>See more</a>
+          </Link>
+        </div>
         {topRatedMovies.slice(0, 4).map(topRatedMovie => {
           let date = new Date(topRatedMovie.release_date);
           return (
@@ -23,8 +32,16 @@ const Index = ({ topRatedMovies, popularMovies, upcomingMovies }) => (
           );
         })}
       </div>
-      <div className='popular-w'>
-        <h2 className='heading'>Popular Movies</h2>
+      <div className='popular-overview-w'>
+        <div className='heading-w'>
+          <h2 className='heading'>Popular Movies</h2>
+          <Link
+            href={{ pathname: '/popular/page/[number]' }}
+            as='/popular/page/1'
+          >
+            <a className='see-more'>See more</a>
+          </Link>
+        </div>
         {popularMovies.slice(0, 4).map(popularMovie => {
           let date = new Date(popularMovie.release_date);
           return (
@@ -38,8 +55,16 @@ const Index = ({ topRatedMovies, popularMovies, upcomingMovies }) => (
           );
         })}
       </div>
-      <div className='upcoming-w'>
-        <h2 className='heading'>Upcoming Movies</h2>
+      <div className='upcoming-overview-w'>
+        <div className='heading-w'>
+          <h2 className='heading'>Upcoming Movies</h2>
+          <Link
+            href={{ pathname: '/upcoming/page/[number]' }}
+            as='/upcoming/page/1'
+          >
+            <a className='see-more'>See more</a>
+          </Link>
+        </div>
         {upcomingMovies.slice(0, 4).map(upcomingMovie => {
           let date = new Date(upcomingMovie.release_date);
           return (
@@ -49,6 +74,7 @@ const Index = ({ topRatedMovies, popularMovies, upcomingMovies }) => (
               title={upcomingMovie.title}
               releaseDate={date.getFullYear()}
               rating={upcomingMovie.vote_average}
+              className='movie-card'
             />
           );
         })}
