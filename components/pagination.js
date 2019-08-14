@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import '../static/styles/pagination.scss';
-import Router from 'next/router';
 
 const LEFT_PAGE = 'LEFT';
 const RIGHT_PAGE = 'RIGHT';
@@ -17,7 +16,7 @@ const range = (from, to, step = 1) => {
   return range;
 };
 
-const Pagination = ({ totalPages, nextPage, currentPage, title }) => {
+const Pagination = ({ totalPages, nextPage, currentPage, title, route }) => {
   const pageNeighbours = 2;
 
   const fetchPageNumbers = () => {
@@ -71,31 +70,16 @@ const Pagination = ({ totalPages, nextPage, currentPage, title }) => {
 
   const handleClick = page => () => {
     nextPage(page);
-
-    Router.push(
-      '/search/[title]/page/[number]',
-      `/search/${encodeURIComponent(title)}/page/${page}`
-    );
   };
 
   const moveLeft = currentPage - pageNeighbours * 2 - 1;
   const handleMoveLeft = () => {
     nextPage(moveLeft);
-
-    Router.push(
-      '/search/[title]/page/[number]',
-      `/search/${encodeURIComponent(title)}/page/${moveLeft}`
-    );
   };
 
   const moveRight = currentPage + pageNeighbours * 2 + 1;
   const handleMoveRight = () => {
     nextPage(moveRight);
-
-    Router.push(
-      '/search/[title]/page/[number]',
-      `/search/${encodeURIComponent(title)}/page/${moveRight}`
-    );
   };
 
   return (
@@ -104,42 +88,134 @@ const Pagination = ({ totalPages, nextPage, currentPage, title }) => {
         if (page === LEFT_PAGE)
           return (
             <li key={index} className='page-item'>
-              <Link
-                href={{
-                  pathname: '/search/[title]/page/[number]'
-                }}
-                as={`/search/${encodeURIComponent(title)}/page/${page}`}
-              >
-                <a
-                  className='page-link'
-                  href='#'
-                  aria-label='Previous'
-                  onClick={handleMoveLeft}
+              {route === '/search/[title]/page/[number]' ? (
+                <Link
+                  href={{
+                    pathname: '/search/[title]/page/[number]'
+                  }}
+                  as={`/search/${encodeURIComponent(title)}/page/${page}`}
                 >
-                  <span aria-hidden='true'>&laquo;</span>
-                </a>
-              </Link>
+                  <a
+                    className='page-link'
+                    aria-label='Previous'
+                    onClick={handleMoveLeft}
+                  >
+                    <span aria-hidden='true'>&laquo;</span>
+                  </a>
+                </Link>
+              ) : route === '/top-rated/page/[number]' ? (
+                <Link
+                  href={{
+                    pathname: '/top-rated/page/[number]'
+                  }}
+                  as={`/top-rated/page/${moveLeft}`}
+                >
+                  <a
+                    className='page-link'
+                    aria-label='Previous'
+                    onClick={handleMoveLeft}
+                  >
+                    <span aria-hidden='true'>&laquo;</span>
+                  </a>
+                </Link>
+              ) : route === '/popular/page/[number]' ? (
+                <Link
+                  href={{
+                    pathname: '/popular/page/[number]'
+                  }}
+                  as={`/popular/page/${moveLeft}`}
+                >
+                  <a
+                    className='page-link'
+                    aria-label='Previous'
+                    onClick={handleMoveLeft}
+                  >
+                    <span aria-hidden='true'>&laquo;</span>
+                  </a>
+                </Link>
+              ) : route === '/upcoming/page/[number]' ? (
+                <Link
+                  href={{
+                    pathname: '/upcoming/page/[number]'
+                  }}
+                  as={`/upcoming/page/${moveLeft}`}
+                >
+                  <a
+                    className='page-link'
+                    aria-label='Previous'
+                    onClick={handleMoveLeft}
+                  >
+                    <span aria-hidden='true'>&laquo;</span>
+                  </a>
+                </Link>
+              ) : null}
             </li>
           );
 
         if (page === RIGHT_PAGE)
           return (
             <li key={index} className='page-item'>
-              <Link
-                href={{
-                  pathname: '/search/[title]/page/[number]'
-                }}
-                as={`/search/${encodeURIComponent(title)}/${page}`}
-              >
-                <a
-                  className='page-link'
-                  href='#'
-                  aria-label='Next'
-                  onClick={handleMoveRight}
+              {route === '/search/[title]/page/[number]' ? (
+                <Link
+                  href={{
+                    pathname: '/search/[title]/page/[number]'
+                  }}
+                  as={`/search/${encodeURIComponent(title)}/${page}`}
                 >
-                  <span aria-hidden='true'>&raquo;</span>
-                </a>
-              </Link>
+                  <a
+                    className='page-link'
+                    aria-label='Next'
+                    onClick={handleMoveRight}
+                  >
+                    <span aria-hidden='true'>&raquo;</span>
+                  </a>
+                </Link>
+              ) : route === '/top-rated/page/[number]' ? (
+                <Link
+                  href={{
+                    pathname: '/top-rated/page/[number]'
+                  }}
+                  as={`/top-rated/page/${moveRight}`}
+                >
+                  <a
+                    className='page-link'
+                    aria-label='Next'
+                    onClick={handleMoveRight}
+                  >
+                    <span aria-hidden='true'>&raquo;</span>
+                  </a>
+                </Link>
+              ) : route === '/popular/page/[number]' ? (
+                <Link
+                  href={{
+                    pathname: '/popular/page/[number]'
+                  }}
+                  as={`/popular/page/${moveRight}`}
+                >
+                  <a
+                    className='page-link'
+                    aria-label='Next'
+                    onClick={handleMoveRight}
+                  >
+                    <span aria-hidden='true'>&raquo;</span>
+                  </a>
+                </Link>
+              ) : route === '/upcoming/page/[number]' ? (
+                <Link
+                  href={{
+                    pathname: '/upcoming/page/[number]'
+                  }}
+                  as={`/upcoming/page/${moveRight}`}
+                >
+                  <a
+                    className='page-link'
+                    aria-label='Next'
+                    onClick={handleMoveRight}
+                  >
+                    <span aria-hidden='true'>&raquo;</span>
+                  </a>
+                </Link>
+              ) : null}
             </li>
           );
 
@@ -148,16 +224,51 @@ const Pagination = ({ totalPages, nextPage, currentPage, title }) => {
             key={index}
             className={`page-item${currentPage === page ? ' active' : ''}`}
           >
-            <Link
-              href={{
-                pathname: '/search/[title]/page/[number]'
-              }}
-              as={`/search/${encodeURIComponent(title)}/page/${page}`}
-            >
-              <a className='page-link' onClick={handleClick(page)}>
-                {page}
-              </a>
-            </Link>
+            {route === '/search/[title]/page/[number]' ? (
+              <Link
+                href={{
+                  pathname: '/search/[title]/page/[number]'
+                }}
+                as={`/search/${encodeURIComponent(title)}/page/${page}`}
+              >
+                <a className='page-link' onClick={handleClick(page)}>
+                  {page}
+                </a>
+              </Link>
+            ) : route === '/top-rated/page/[number]' ? (
+              <Link
+                href={{
+                  pathname: '/top-rated/page/[number]'
+                }}
+                as={`/top-rated/page/${page}`}
+              >
+                <a className='page-link' onClick={handleClick(page)}>
+                  {page}
+                </a>
+              </Link>
+            ) : route === '/popular/page/[number]' ? (
+              <Link
+                href={{
+                  pathname: '/popular/page/[number]'
+                }}
+                as={`/popular/page/${page}`}
+              >
+                <a className='page-link' onClick={handleClick(page)}>
+                  {page}
+                </a>
+              </Link>
+            ) : route === '/upcoming/page/[number]' ? (
+              <Link
+                href={{
+                  pathname: '/upcoming/page/[number]'
+                }}
+                as={`/upcoming/page/${page}`}
+              >
+                <a className='page-link' onClick={handleClick(page)}>
+                  {page}
+                </a>
+              </Link>
+            ) : null}
           </li>
         );
       })}
