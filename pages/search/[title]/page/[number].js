@@ -44,6 +44,10 @@ const Movie = ({
     <Layout>
       {movies !== undefined && movies.length > 0 ? (
         <div className='movie-w'>
+          <h5 className='result-heading'>
+            Results for
+            <span className='search-value'>{` "${searchValue}"`}</span>
+          </h5>
           {movies.map(movie => {
             let date = new Date(movie.release_date);
             return (
@@ -53,6 +57,7 @@ const Movie = ({
                 title={movie.title}
                 releaseDate={date.getFullYear()}
                 rating={movie.vote_average}
+                className='movie-card'
               />
             );
           })}
@@ -66,6 +71,7 @@ const Movie = ({
           nextPage={NextPage}
           currentPage={currentPage}
           title={searchValue}
+          route='/search/[title]/page/[number]'
         />
       ) : null}
     </Layout>
