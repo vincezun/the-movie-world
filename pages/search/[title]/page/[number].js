@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
+import { useRouter } from 'next/router';
 
 import Layout from '../../../../components/layout/layout';
 import MovieCard from '../../../../components/movie/movie-card';
@@ -7,7 +8,7 @@ import Pagination from '../../../../components/pagination';
 
 import '../../../../static/styles/search-movie.scss';
 
-const Movie = ({
+const SearchMovie = ({
   movieResults,
   searchValue,
   totalResults,
@@ -16,6 +17,8 @@ const Movie = ({
   const [movies, setMovies] = useState(movieResults);
   const [totalMovieResults, setTotalMovieResults] = useState(0);
   const [currentPage, setCurrentPage] = useState(activePageNumber);
+  const router = useRouter();
+  const { resultsHeading } = router.query;
 
   useEffect(() => {
     setMovies(movieResults);
@@ -43,10 +46,10 @@ const Movie = ({
   return (
     <Layout>
       {movies !== undefined && movies.length > 0 ? (
-        <div className='movie-w'>
+        <div className='search-w'>
           <h5 className='result-heading'>
             Results for
-            <span className='search-value'>{` "${searchValue}"`}</span>
+            <span className='search-value'>{` "${resultsHeading}"`}</span>
           </h5>
           {movies.map(movie => {
             let date = new Date(movie.release_date);
@@ -56,8 +59,7 @@ const Movie = ({
                 poster={movie.poster_path}
                 title={movie.title}
                 releaseDate={date.getFullYear()}
-                rating={movie.vote_average}
-                className='movie-card'
+                id={movie.id}
               />
             );
           })}
@@ -78,7 +80,7 @@ const Movie = ({
   );
 };
 
-Movie.getInitialProps = async context => {
+SearchMovie.getInitialProps = async context => {
   const { title, number } = context.query;
 
   const url = `https://api.themoviedb.org/3/search/movie?api_key=${
@@ -96,4 +98,4 @@ Movie.getInitialProps = async context => {
   };
 };
 
-export default Movie;
+export default SearchMovie;

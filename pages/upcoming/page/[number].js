@@ -46,7 +46,7 @@ const TopRated = ({ movieResults, totalResults, activePageNumber }) => {
               poster={movie.poster_path}
               title={movie.title}
               releaseDate={date.getFullYear()}
-              rating={movie.vote_average}
+              id={movie.id}
             />
           );
         })}

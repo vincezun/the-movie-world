@@ -27,7 +27,7 @@ const Index = ({ topRatedMovies, popularMovies, upcomingMovies }) => (
               poster={topRatedMovie.poster_path}
               title={topRatedMovie.title}
               releaseDate={date.getFullYear()}
-              rating={topRatedMovie.vote_average}
+              id={topRatedMovie.id}
             />
           );
         })}
@@ -50,7 +50,7 @@ const Index = ({ topRatedMovies, popularMovies, upcomingMovies }) => (
               poster={popularMovie.poster_path}
               title={popularMovie.title}
               releaseDate={date.getFullYear()}
-              rating={popularMovie.vote_average}
+              id={popularMovie.id}
             />
           );
         })}
@@ -73,8 +73,7 @@ const Index = ({ topRatedMovies, popularMovies, upcomingMovies }) => (
               poster={upcomingMovie.poster_path}
               title={upcomingMovie.title}
               releaseDate={date.getFullYear()}
-              rating={upcomingMovie.vote_average}
-              className='movie-card'
+              id={upcomingMovie.id}
             />
           );
         })}
