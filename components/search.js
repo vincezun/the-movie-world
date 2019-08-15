@@ -1,12 +1,13 @@
 import { useState } from 'react';
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
-import { useComponentVisible } from '../components/hook/useComponentVisible';
+import { useComponentVisible } from '../components/hooks/useComponentVisible';
+import { useSlugify } from '../components/hooks/useSlugify';
 import Router from 'next/router';
 
 import '../static/styles/search.scss';
 
-const Search = () => {
+const SearchBox = () => {
   const [movies, setMovies] = useState([]);
 
   const {
@@ -57,7 +58,7 @@ const Search = () => {
       if (searchBox.value.trim() !== '') {
         Router.push(
           '/search/[title]/page/[number]',
-          `/search/${encodeURIComponent(searchBox.value)}/page/${1}`
+          `/search/${encodeURIComponent(useSlugify(searchBox.value))}/page/${1}`
         );
       }
 
@@ -68,7 +69,7 @@ const Search = () => {
 
   return (
     <div ref={ref}>
-      <div className='search-w'>
+      <div className='search-box-w'>
         <input
           type='search'
           name='search'
@@ -89,9 +90,12 @@ const Search = () => {
                 <li key={i} onClick={hideOverlay}>
                   <Link
                     href={{
-                      pathname: '/search/[title]/page/[number]'
+                      pathname: '/search/[title]/page/[number]',
+                      query: { resultsHeading: movie.title }
                     }}
-                    as={`/search/${encodeURIComponent(movie.title)}/page/${1}`} //if % is in the url before it fetch, it will throw URIError: URI malformed
+                    as={`/search/${encodeURIComponent(
+                      useSlugify(movie.title)
+                    )}/page/${1}`} //if % is in the url before it fetch, it will throw URIError: URI malformed
                   >
                     <a className='links'>{movie.title}</a>
                   </Link>
@@ -107,4 +111,4 @@ const Search = () => {
   );
 };
 
-export default Search;
+export default SearchBox;
