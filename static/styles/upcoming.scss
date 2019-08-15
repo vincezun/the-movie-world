@@ -8,12 +8,4 @@
     @include heading;
     grid-area: heading;
   }
-
-  .pagination {
-    grid-area: pagination;
-  }
-
-  .movie-card {
-    grid-area: movie-card;
-  }
 }
