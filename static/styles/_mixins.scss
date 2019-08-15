@@ -44,6 +44,7 @@ $font: 'Roboto', sans-serif;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: 'heading heading';
   grid-column-gap: 20px;
+  grid-row-gap: 20px;
 
   @include breakpoint(sw500px) {
     grid-template-columns: 210px 210px;
@@ -53,6 +54,7 @@ $font: 'Roboto', sans-serif;
   @include breakpoint(sw768px) {
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-areas: 'heading heading heading heading';
+    grid-row-gap: 30px;
   }
 
   @include breakpoint(sw1024px) {
