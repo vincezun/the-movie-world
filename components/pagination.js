@@ -93,7 +93,7 @@ const Pagination = ({ totalPages, nextPage, currentPage, title, route }) => {
                   href={{
                     pathname: '/search/[title]/page/[number]'
                   }}
-                  as={`/search/${encodeURIComponent(title)}/page/${page}`}
+                  as={`/search/${encodeURIComponent(title)}/page/${moveLeft}`}
                 >
                   <a
                     className='page-link'
@@ -160,7 +160,7 @@ const Pagination = ({ totalPages, nextPage, currentPage, title, route }) => {
                   href={{
                     pathname: '/search/[title]/page/[number]'
                   }}
-                  as={`/search/${encodeURIComponent(title)}/${page}`}
+                  as={`/search/${encodeURIComponent(title)}/page/${moveRight}`}
                 >
                   <a
                     className='page-link'
