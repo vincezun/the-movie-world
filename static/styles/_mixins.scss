@@ -19,6 +19,12 @@ $font: 'Roboto', sans-serif;
     }
   }
 
+  @if $breakpoint == sw992px {
+    @media only screen and(min-width: 992px) {
+      @content;
+    }
+  }
+
   @if $breakpoint == sw1024px {
     @media only screen and(min-width: 1024px) {
       @content;
