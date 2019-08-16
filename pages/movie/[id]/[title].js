@@ -1,15 +1,29 @@
+import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
+import { useRouter } from 'next/router';
 
 import Layout from '../../../components/layout/layout';
+import MovieCasts from '../../../components/movie/movie-casts';
 
 import posterNotAvailabble from '../../../static/images/poster-not-available.svg';
+
 import star from '../../../static/images/star.svg';
 
-const Movie = ({ movie, videos }) => {
-  const time = (movie.runtime / 60).toFixed(2);
-  const runtime = time.replace('.', 'h ');
+import '../../../static/styles/movie.scss';
 
-  const options = { day: 'numeric', month: 'long', year: 'numeric' };
+const Movie = ({ movie, videos, movieCasts }) => {
+  let time;
+  movie.runtime > 60
+    ? (time = (movie.runtime / 60).toFixed(2))
+    : (time = movie.runtime);
+
+  let runtime;
+  movie.runtime > 60 ? (runtime = time.replace('.', 'h ')) : (runtime = time);
+
+  const router = useRouter();
+  const { id, title } = router.query;
+
+  const options = { day: 'numeric', month: 'short', year: 'numeric' };
   const date = new Date(movie.release_date).toLocaleDateString(
     'en-ZA',
     options
@@ -17,7 +31,10 @@ const Movie = ({ movie, videos }) => {
 
   let keys = [];
   videos.map(video => {
-    if (video.type === 'Trailer' && video.size === 1080) {
+    if (
+      (video.type === 'Trailer' && video.size === 1080) ||
+      video.size === 720
+    ) {
       keys.push(video);
     }
   });
@@ -35,35 +52,45 @@ const Movie = ({ movie, videos }) => {
         ) : (
           <figcaption className='title'>N/A</figcaption>
         )}
-        <div className='rating-w'>
-          <img src={star} alt='Star' className='star-icon' />
-          {movie.vote_average ? (
-            <p className='rating'>{movie.vote_average}</p>
-          ) : (
-            <p className='rating'>N/A</p>
-          )}
-        </div>
-        {movie.runtime ? (
-          <p className='runtime'>{`${runtime}min`} </p>
-        ) : (
-          <p className='runtime'>N/A</p>
-        )}
-        {movie.genres ? (
-          <ul className='genres'>
-            {movie.genres.map(genre => (
-              <li key={genre.id} className='name'>
-                {genre.name}
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className='genre'>N/A</p>
-        )}
-        {movie.release_date ? (
-          <p className='release-date'>{date}</p>
-        ) : (
-          <p className='release-date'>N/A</p>
-        )}
+        <ul className='sub-text-w'>
+          <li className='sub-text'>
+            <div className='rating-w'>
+              <img src={star} alt='Star' className='star-icon' />
+              {movie.vote_average ? (
+                <p className='rating'>{movie.vote_average}</p>
+              ) : (
+                <p className='rating'>N/A</p>
+              )}
+            </div>
+          </li>
+          <li className='sub-text'>
+            {movie.runtime ? (
+              <p className='runtime'>{`${runtime}min`} </p>
+            ) : (
+              <p className='runtime'>N/A</p>
+            )}
+          </li>
+          <li className='sub-text'>
+            {movie.genres ? (
+              <ul className='genres'>
+                {movie.genres.map(genre => (
+                  <li key={genre.id} className='name'>
+                    {genre.name}
+                  </li>
+                ))}
+              </ul>
+            ) : (
+              <p className='genre'>N/A</p>
+            )}
+          </li>
+          <li className='sub-text'>
+            {movie.release_date ? (
+              <p className='release-date'>{date}</p>
+            ) : (
+              <p className='release-date'>N/A</p>
+            )}
+          </li>
+        </ul>
         {movie.poster_path ? (
           <img
             src={`http://image.tmdb.org/t/p/w370_and_h556_bestv2${
@@ -79,24 +106,39 @@ const Movie = ({ movie, videos }) => {
             className='poster'
           />
         )}
-        <h5 className='overview-heading'>Overview</h5>
-        {movie.overview ? (
-          <p className='overview'>{movie.overview}</p>
-        ) : (
-          <p className='overview'>N/A</p>
-        )}
         {trailerKey ? (
-          <>
-            <h5 className='trailer-heading'>Trailer</h5>
+          <div className='trailer-w'>
             <iframe
               src={`https://www.youtube.com/embed/${trailerKey}`}
               frameBorder='0'
               className='trailer'
             />
-          </>
+          </div>
         ) : (
-          <p className='no-trailer'>N/A</p>
+          <div title='This video is unavailable.' className='no-trailer' />
         )}
+        {movie.overview ? (
+          <p className='overview'>{movie.overview}</p>
+        ) : (
+          <p className='overview'>N/A</p>
+        )}
+        <div className='casts-w'>
+          <h5 className='cast-heading'>Casts</h5>
+          {movieCasts.slice(0, 10).map(cast => (
+            <MovieCasts
+              key={cast.id}
+              profilePath={cast.profile_path}
+              name={cast.name}
+              character={cast.character}
+            />
+          ))}
+          <Link
+            href={{ pathname: '/movie/[id]/[title]/casts' }}
+            as={`/movie/${id}/${title}/casts`}
+          >
+            <a className='full-cast'>See full cast &raquo;</a>
+          </Link>
+        </div>
       </figure>
     </Layout>
   );
@@ -113,15 +155,23 @@ Movie.getInitialProps = async context => {
     process.env.API_KEY
   }`;
 
+  const castsUrl = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${
+    process.env.API_KEY
+  }`;
+
   const res = await fetch(url);
   const data = await res.json();
 
   const videosRes = await fetch(videosUrl);
   const videosData = await videosRes.json();
 
+  const castsRes = await fetch(castsUrl);
+  const castsData = await castsRes.json();
+
   return {
     movie: data,
-    videos: videosData.results
+    videos: videosData.results,
+    movieCasts: castsData.cast
   };
 };
 
