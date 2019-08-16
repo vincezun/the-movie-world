@@ -19,8 +19,12 @@
   }
 }
 
-.no-results {
-  padding: 120px 30px 0;
+.no-results-text {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  padding-top: 80px;
   font: 700 2rem/25px $font;
   color: #202020;
 }
