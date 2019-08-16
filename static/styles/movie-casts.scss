@@ -1,0 +1,64 @@
+@import '_mixins.scss';
+
+.cast {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  grid-template-areas:
+    'profile name'
+    'profile character';
+  grid-template-rows: auto 1fr;
+  grid-column-gap: 10px;
+
+  @include breakpoint(sw500px) {
+    grid-template-columns: 40px 215px auto 1fr;
+    grid-template-areas: 'profile name dots character';
+    align-items: center;
+  }
+
+  @include breakpoint(sw1024px) {
+    grid-auto-columns: 40px 215px 11px 667px;
+    justify-content: center;
+  }
+
+  .profile {
+    width: 100%;
+    grid-area: profile;
+  }
+
+  .name {
+    font: 500 1.4rem/19px $font;
+    color: #202020;
+    grid-area: name;
+    margin-top: 11px;
+
+    @include breakpoint(sw500px) {
+      margin-top: 0;
+    }
+  }
+
+  .ellipsis {
+    display: none;
+
+    @include breakpoint(sw500px) {
+      display: block;
+      font: 400 1.4rem/19px $font;
+      color: #979797;
+      grid-area: dots;
+      margin-bottom: 8px;
+    }
+  }
+
+  .character {
+    font: 400 1.4rem/19px $font;
+    color: #979797;
+    grid-area: character;
+  }
+
+  &:nth-child(odd) {
+    background-color: #f6f6f5;
+  }
+
+  &:nth-child(even) {
+    background-color: #fbfbfb;
+  }
+}

@@ -1,0 +1,217 @@
+@import '_mixins.scss';
+
+.movie-w {
+  @include base-w;
+
+  @include breakpoint(sw500px) {
+    display: grid;
+    grid-template-columns: 160px 1fr;
+    grid-template-areas:
+      'title title'
+      'sub-text sub-text'
+      'poster trailer'
+      'overview overview'
+      'cast cast';
+
+    justify-content: center;
+  }
+
+  @include breakpoint(sw660px) {
+    grid-template-columns: 225px 1fr;
+  }
+
+  @include breakpoint(sw768px) {
+    grid-template-columns: 270px 1fr;
+  }
+
+  @include breakpoint(sw992px) {
+    grid-template-columns: 300px 1fr;
+  }
+
+  @include breakpoint(sw1024px) {
+    grid-template-columns: 300px 664px;
+  }
+
+  .title {
+    font: 700 2.2rem/27px $font;
+    color: #202020;
+
+    @include breakpoint(sw500px) {
+      grid-area: title;
+    }
+
+    @include breakpoint(sw660px) {
+      font: 700 2.7rem/32px $font;
+    }
+
+    @include breakpoint(sw768px) {
+      font: 700 3.2rem/37px $font;
+    }
+  }
+
+  .sub-text-w {
+    margin-top: 5px;
+
+    @include breakpoint(sw500px) {
+      grid-area: sub-text;
+      margin: 5px 0 15px;
+    }
+
+    .sub-text {
+      display: inline;
+
+      &::after {
+        content: ' | ';
+        padding: 0 8px;
+        vertical-align: 2px;
+        color: #d8d8d8;
+      }
+
+      &:last-child::after {
+        content: '';
+      }
+    }
+
+    %font {
+      font: 400 1.4rem/19px $font;
+      color: #979797;
+      display: inline;
+    }
+
+    .rating-w {
+      display: inline;
+
+      .rating {
+        @extend %font;
+      }
+
+      .star-icon {
+        width: 12px;
+        display: inline-block;
+        margin-right: 4px;
+      }
+    }
+
+    .runtime {
+      @extend %font;
+    }
+
+    .genres {
+      display: inline;
+
+      .name {
+        @extend %font;
+        list-style: none;
+        display: inline;
+
+        &::after {
+          content: ', ';
+        }
+
+        &:last-child::after {
+          content: '';
+        }
+      }
+    }
+
+    .release-date {
+      @extend %font;
+    }
+  }
+
+  .poster {
+    width: 100%;
+    margin-top: 15px;
+
+    @include breakpoint(sw500px) {
+      grid-area: poster;
+      margin-top: 0;
+    }
+  }
+
+  .trailer-w {
+    margin-top: -2px;
+
+    @include breakpoint(sw500px) {
+      grid-area: trailer;
+      margin-top: 0;
+    }
+
+    .trailer {
+      width: 100%;
+      height: 200px;
+
+      @include breakpoint(sw500px) {
+        height: 240px;
+      }
+
+      @include breakpoint(sw660px) {
+        height: 338px;
+      }
+
+      @include breakpoint(sw768px) {
+        height: 405px;
+      }
+
+      @include breakpoint(sw992px) {
+        height: 451px;
+      }
+    }
+  }
+
+  .no-trailer {
+    margin-top: -2px;
+    background: url('/static/images/video-not-available.png');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 200px;
+
+    @include breakpoint(sw500px) {
+      margin-top: 0;
+      height: 240px;
+    }
+
+    @include breakpoint(sw660px) {
+      height: 338px;
+    }
+
+    @include breakpoint(sw768px) {
+      height: 405px;
+    }
+
+    @include breakpoint(sw992px) {
+      height: 451px;
+    }
+  }
+
+  .overview {
+    font: 400 1.4rem/19px $font;
+    color: #202020;
+    margin-top: 20px;
+
+    @include breakpoint(sw500px) {
+      grid-area: overview;
+    }
+  }
+
+  .casts-w {
+    @include breakpoint(sw500px) {
+      grid-area: cast;
+    }
+
+    .cast-heading {
+      font: 700 1.8rem/23px $font;
+      color: #202020;
+      margin: 40px 0 20px;
+    }
+
+    .full-cast {
+      font: 400 1.4rem/19px $font;
+      color: #979797;
+      display: inline-block;
+      margin-top: 20px;
+    }
+  }
+}

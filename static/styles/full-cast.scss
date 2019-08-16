@@ -1,0 +1,53 @@
+@import '_mixins.scss';
+
+.full-cast-w {
+  @include base-w;
+
+  @include breakpoint(sw1024px) {
+    display: grid;
+    grid-template-columns: 964px;
+    justify-content: center;
+  }
+
+  .links {
+    li {
+      list-style: none;
+
+      .back {
+        font: 400 1.4rem/19px $font;
+        color: #979797;
+        // display: block;
+      }
+
+      .movie-heading {
+        font: 400 2.2rem/27px $font;
+        color: #202020;
+        display: inline-block;
+        margin-top: 15px;
+
+        @include breakpoint(sw660px) {
+          font: 400 2.7rem/32px $font;
+        }
+
+        @include breakpoint(sw768px) {
+          font: 400 3.2rem/37px $font;
+        }
+      }
+    }
+  }
+
+  .cast-heading {
+    font: 400 1.5rem/20px $font;
+    color: #979797;
+    margin: 2px 0 30px;
+
+    @include breakpoint(sw660px) {
+      font: 400 2rem/25px $font;
+      margin: 2px 0 40px;
+    }
+
+    @include breakpoint(sw768px) {
+      font: 400 2.5rem/30px $font;
+    }
+  }
+}
