@@ -25,9 +25,10 @@ class MyApp extends App {
       <Container>
         <Head>
           <link
-            href='https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap'
+            href='https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap'
             rel='stylesheet'
           />
+          <title>Movie World</title>
         </Head>
         <Component {...pageProps} />
       </Container>
