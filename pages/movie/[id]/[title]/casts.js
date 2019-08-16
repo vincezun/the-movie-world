@@ -33,14 +33,18 @@ const FullMovieCast = ({ movieCasts, movie }) => {
           </li>
         </ul>
         <p className='cast-heading'>Full Cast</p>
-        {movieCasts.map((cast, i) => (
-          <MovieCasts
-            key={i}
-            profilePath={cast.profile_path}
-            name={cast.name}
-            character={cast.character}
-          />
-        ))}
+        {movieCasts.length > 0 ? (
+          movieCasts.map((cast, i) => (
+            <MovieCasts
+              key={i}
+              profilePath={cast.profile_path}
+              name={cast.name}
+              character={cast.character}
+            />
+          ))
+        ) : (
+          <p className='no-casts'>N/A</p>
+        )}
       </div>
     </Layout>
   );

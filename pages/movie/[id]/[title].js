@@ -71,7 +71,7 @@ const Movie = ({ movie, videos, movieCasts }) => {
             )}
           </li>
           <li className='sub-text'>
-            {movie.genres ? (
+            {movie.genres.length > 0 ? (
               <ul className='genres'>
                 {movie.genres.map(genre => (
                   <li key={genre.id} className='name'>
@@ -80,7 +80,7 @@ const Movie = ({ movie, videos, movieCasts }) => {
                 ))}
               </ul>
             ) : (
-              <p className='genre'>N/A</p>
+              <p className='no-genres'>N/A</p>
             )}
           </li>
           <li className='sub-text'>
@@ -124,14 +124,20 @@ const Movie = ({ movie, videos, movieCasts }) => {
         )}
         <div className='casts-w'>
           <h5 className='cast-heading'>Casts</h5>
-          {movieCasts.slice(0, 10).map(cast => (
-            <MovieCasts
-              key={cast.id}
-              profilePath={cast.profile_path}
-              name={cast.name}
-              character={cast.character}
-            />
-          ))}
+          {movieCasts.length > 0 ? (
+            movieCasts
+              .slice(0, 10)
+              .map(cast => (
+                <MovieCasts
+                  key={cast.id}
+                  profilePath={cast.profile_path}
+                  name={cast.name}
+                  character={cast.character}
+                />
+              ))
+          ) : (
+            <p className='no-casts'>N/A</p>
+          )}
           <Link
             href={{ pathname: '/movie/[id]/[title]/casts' }}
             as={`/movie/${id}/${title}/casts`}
