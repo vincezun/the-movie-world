@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import fetch from 'isomorphic-unfetch';
-import { useRouter } from 'next/router';
 
 import Layout from '../../../../components/layout/layout';
 import MovieCard from '../../../../components/movie/movie-card';
@@ -17,8 +16,6 @@ const SearchMovie = ({
   const [movies, setMovies] = useState(movieResults);
   const [totalMovieResults, setTotalMovieResults] = useState(0);
   const [currentPage, setCurrentPage] = useState(activePageNumber);
-  const router = useRouter();
-  const { resultsHeading } = router.query;
 
   useEffect(() => {
     setMovies(movieResults);
@@ -49,7 +46,7 @@ const SearchMovie = ({
         <div className='search-w'>
           <h5 className='result-heading'>
             Results for
-            <span className='search-value'>{` "${resultsHeading}"`}</span>
+            <span className='search-value'>{` "${searchValue}"`}</span>
           </h5>
           {movies.map(movie => {
             let date = new Date(movie.release_date);
@@ -65,7 +62,7 @@ const SearchMovie = ({
           })}
         </div>
       ) : (
-        <p className='no-results'>No Results</p>
+        <p className='no-results-text'>No Results</p>
       )}
       {totalMovieResults > 20 ? (
         <Pagination
