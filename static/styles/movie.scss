@@ -70,6 +70,10 @@
       &:last-child::after {
         content: '';
       }
+
+      .no-genres {
+        @extend %font;
+      }
     }
 
     %font {
@@ -212,6 +216,11 @@
       color: #979797;
       display: inline-block;
       margin-top: 20px;
+    }
+
+    .no-casts {
+      font: 400 1.4rem/19px $font;
+      color: #979797;
     }
   }
 }
