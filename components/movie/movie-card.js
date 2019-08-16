@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import posterNotAvailabble from '../../static/images/poster-not-available.svg';
-import { useSlugify } from '../hooks/useSlugify';
 
 import '../../static/styles/movie-card.scss';
 
@@ -8,7 +7,7 @@ const MovieCard = ({ poster, title, releaseDate, id }) => {
   return (
     <Link
       href={{ pathname: '/movie/[id]/[title]' }}
-      as={`/movie/${id}/${useSlugify(title)}`}
+      as={`/movie/${id}/${title}`}
     >
       <a className='movie'>
         <figure>

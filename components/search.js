@@ -58,7 +58,7 @@ const SearchBox = () => {
       if (searchBox.value.trim() !== '') {
         Router.push(
           '/search/[title]/page/[number]',
-          `/search/${encodeURIComponent(useSlugify(searchBox.value))}/page/${1}`
+          `/search/${encodeURIComponent(searchBox.value)}/page/${1}`
         );
       }
 
@@ -93,9 +93,7 @@ const SearchBox = () => {
                       pathname: '/search/[title]/page/[number]',
                       query: { resultsHeading: movie.title }
                     }}
-                    as={`/search/${encodeURIComponent(
-                      useSlugify(movie.title)
-                    )}/page/${1}`} //if % is in the url before it fetch, it will throw URIError: URI malformed
+                    as={`/search/${encodeURIComponent(movie.title)}/page/${1}`} //if % is in the url before it fetch, it will throw URIError: URI malformed
                   >
                     <a className='links'>{movie.title}</a>
                   </Link>
