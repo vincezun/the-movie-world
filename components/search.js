@@ -2,7 +2,6 @@ import { useState } from 'react';
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
 import { useComponentVisible } from '../components/hooks/useComponentVisible';
-import { useSlugify } from '../components/hooks/useSlugify';
 import Router from 'next/router';
 
 import '../static/styles/search.scss';
