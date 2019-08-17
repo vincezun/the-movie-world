@@ -7,7 +7,7 @@ import Router from 'next/router';
 import '../static/styles/search.scss';
 
 const SearchBox = () => {
-  const [movies, setMovies] = useState([]);
+  const [movies, setMovies] = useState(null);
 
   const {
     ref,
@@ -25,7 +25,7 @@ const SearchBox = () => {
       const data = await res.json();
       return setMovies(data.results);
     } else {
-      setMovies([]);
+      setMovies(null);
     }
   };
 
@@ -35,11 +35,21 @@ const SearchBox = () => {
     performSearch(value);
     setIsComponentVisible(true);
     const noResults = document.querySelector('.no-results');
+    const isLoading = document.querySelector('.loading');
+
     if (noResults) {
       if (value) {
         noResults.classList.add('active');
       } else {
         noResults.classList.remove('active');
+      }
+    }
+
+    if (isLoading) {
+      if (value.trim() !== '') {
+        isLoading.classList.add('active');
+      } else {
+        isLoading.classList.remove('active');
       }
     }
   };
@@ -83,7 +93,9 @@ const SearchBox = () => {
       </div>
       {isComponentVisible && (
         <ul className='search-overlay'>
-          {movies !== undefined && movies.length > 0 ? (
+          {movies === null ? (
+            <p className='loading'>Loading...</p>
+          ) : movies !== undefined && movies.length > 0 ? (
             movies.slice(0, 8).map((movie, i) => {
               return (
                 <li key={i} onClick={hideOverlay}>

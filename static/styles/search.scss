@@ -74,4 +74,15 @@
       display: block;
     }
   }
+
+  .loading {
+    display: none;
+    font: 700 1.4rem/19px $font;
+    color: #202020;
+    padding: 8px 12px;
+
+    &.active {
+      display: block;
+    }
+  }
 }
