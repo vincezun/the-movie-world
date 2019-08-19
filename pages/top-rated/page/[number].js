@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import Layout from '../../../components/layout/layout';
 import MovieCard from '../../../components/movie/movie-card';
@@ -78,6 +79,12 @@ TopRated.getInitialProps = async context => {
     totalResults: data.total_results,
     activePageNumber: parseInt(number)
   };
+};
+
+TopRated.propTypes = {
+  movieResults: PropTypes.array,
+  totalResults: PropTypes.number,
+  activePageNumber: PropTypes.number
 };
 
 export default TopRated;

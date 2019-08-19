@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import posterNotAvailabble from '../../static/images/poster-not-available.svg';
 
@@ -38,6 +39,13 @@ const MovieCard = ({ poster, title, releaseDate, id }) => {
       </a>
     </Link>
   );
+};
+
+MovieCard.propTypes = {
+  poster: PropTypes.string,
+  title: PropTypes.string,
+  releaseDate: PropTypes.number,
+  id: PropTypes.number
 };
 
 export default MovieCard;

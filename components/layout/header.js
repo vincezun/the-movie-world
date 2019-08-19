@@ -18,9 +18,11 @@ const Header = () => {
   return (
     <header className='header'>
       <div className='nav'>
-        <Link href='/'>
-          <a className='heading'>Movie World</a>
-        </Link>
+        <span>
+          <Link href='/'>
+            <a className='heading'>Movie World</a>
+          </Link>
+        </span>
         <span className='hamburger'>
           <span className='bar' />
         </span>

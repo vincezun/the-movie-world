@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import '../static/styles/pagination.scss';
 
@@ -274,6 +275,15 @@ const Pagination = ({ totalPages, nextPage, currentPage, title, route }) => {
       })}
     </ul>
   );
+};
+// totalPages, nextPage, currentPage, title, route
+
+Pagination.propTypes = {
+  totalPages: PropTypes.number,
+  nextPage: PropTypes.func,
+  currentPage: PropTypes.number,
+  title: PropTypes.string,
+  route: PropTypes.string
 };
 
 export default Pagination;

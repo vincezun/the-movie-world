@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import fetch from 'isomorphic-unfetch';
 import Link from 'next/link';
 
@@ -109,6 +110,12 @@ Index.getInitialProps = async () => {
     popularMovies: dataPopular.results,
     upcomingMovies: dataUpcoming.results
   };
+};
+
+Index.propTypes = {
+  topRatedMovies: PropTypes.array,
+  popularMovies: PropTypes.array,
+  upcomingMovies: PropTypes.array
 };
 
 export default Index;

@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 import fetch from 'isomorphic-unfetch';
 
 import Layout from '../../../../components/layout/layout';
@@ -93,6 +94,13 @@ SearchMovie.getInitialProps = async context => {
     searchValue: title,
     activePageNumber: parseInt(number)
   };
+};
+
+SearchMovie.propTypes = {
+  movieResults: PropTypes.array,
+  totalResults: PropTypes.number,
+  searchValue: PropTypes.string,
+  activePageNumber: PropTypes.number
 };
 
 export default SearchMovie;

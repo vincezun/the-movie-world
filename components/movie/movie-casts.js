@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import profileNotAvailable from '../../static/images/poster-not-available.svg';
 
 import '../../static/styles/movie-casts.scss';
@@ -23,6 +24,12 @@ const MovieCast = ({ name, character, profilePath }) => {
       )}
     </div>
   );
+};
+
+MovieCast.propTypes = {
+  name: PropTypes.string,
+  character: PropTypes.string,
+  profilePath: PropTypes.string
 };
 
 export default MovieCast;

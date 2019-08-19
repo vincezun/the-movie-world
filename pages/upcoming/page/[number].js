@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
 
 import Layout from '../../../components/layout/layout';
 import MovieCard from '../../../components/movie/movie-card';
@@ -6,7 +7,7 @@ import Pagination from '../../../components/pagination';
 
 import '../../../static/styles/upcoming.scss';
 
-const TopRated = ({ movieResults, totalResults, activePageNumber }) => {
+const Upcoming = ({ movieResults, totalResults, activePageNumber }) => {
   const [movies, setMovies] = useState(movieResults);
   const [totalMovieResults, setTotalMovieResults] = useState(0);
   const [currentPage, setCurrentPage] = useState(activePageNumber);
@@ -63,7 +64,7 @@ const TopRated = ({ movieResults, totalResults, activePageNumber }) => {
   );
 };
 
-TopRated.getInitialProps = async context => {
+Upcoming.getInitialProps = async context => {
   const { number } = context.query;
 
   const url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${
@@ -76,9 +77,14 @@ TopRated.getInitialProps = async context => {
   return {
     movieResults: data.results,
     totalResults: data.total_results,
-
     activePageNumber: parseInt(number)
   };
 };
 
-export default TopRated;
+Upcoming.propTypes = {
+  movieResults: PropTypes.array,
+  totalResults: PropTypes.number,
+  activePageNumber: PropTypes.number
+};
+
+export default Upcoming;

@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import fetch from 'isomorphic-unfetch';
+import PropTypes from 'prop-types';
 
 import Layout from '../../../../components/layout/layout';
 import MovieCasts from '../../../../components/movie/movie-casts';
@@ -71,6 +72,11 @@ FullMovieCast.getInitialProps = async context => {
     movieCasts: castsData.cast,
     movie: movieData
   };
+};
+
+FullMovieCast.propTypes = {
+  movieCasts: PropTypes.array,
+  movie: PropTypes.object
 };
 
 export default FullMovieCast;

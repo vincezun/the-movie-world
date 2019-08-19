@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import fetch from 'isomorphic-unfetch';
 import { useRouter } from 'next/router';
+import PropTypes from 'prop-types';
 
 import Layout from '../../../components/layout/layout';
 import MovieCasts from '../../../components/movie/movie-casts';
@@ -179,6 +180,12 @@ Movie.getInitialProps = async context => {
     videos: videosData.results,
     movieCasts: castsData.cast
   };
+};
+
+Movie.propTypes = {
+  movie: PropTypes.object,
+  videos: PropTypes.array,
+  movieCasts: PropTypes.array
 };
 
 export default Movie;
